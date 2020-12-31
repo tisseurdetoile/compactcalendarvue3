@@ -1,22 +1,27 @@
 <template>
-  <Weeks :weeks="weeks" :mondayfirst="mondayfirst" />
+  <Weeks :weeks="calendar.weeks" :mondayfirst="calendar.mondayfirst" />
 </template>
 
 <script>
 import Calendar from '../utils/Calendar'
 import Weeks from './Weeks'
 export default {
-  name: 'HelloWorld',
-  data: function() {
-    let start = new Date('January 1, 2020 10:15:30')
-    let stop = new Date('December 31, 2020 10:15:30')
-    let cal = new Calendar(start, stop)
-    return {
-      weeks: cal.listDaysFromMonday(),
-      mondayfirst: cal.getstartMonday(),
-    }
-  },
+  name: 'CompactCalendar',
   components: { Weeks },
+  props: {
+    year: Number,
+  },
+  computed: {
+    calendar: function() {
+      let dtStart = new Date(this.year, 0, 1, 13, 0, 0)
+      let dtStop = new Date(this.year, 11, 31, 13, 0, 0)
+      let cal = new Calendar(dtStart, dtStop)
+      return {
+        weeks: cal.listDaysFromMonday(),
+        mondayfirst: cal.getstartMonday(),
+      }
+    },
+  },
 }
 </script>
 
