@@ -1,24 +1,39 @@
-# compactcalendarvue3
+# Welcome to compactcalendarvue3 👋
 
-## Project setup
-```
+![Version](https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)
+[![Twitter: tisseurdetoile](https://img.shields.io/twitter/follow/tisseurdetoile.svg?style=social)](https://twitter.com/tisseurdetoile)
+
+> An compactCalendar implementation in Vue3
+
+### 🏠 [Homepage](https://github.com/tisseurdetoile/compactcalendarvue3)
+
+### ✨ [Demo](http://github.tisseurdetoile.net/compactcalendarvue3/)
+
+## Install
+
+```sh
 yarn install
 ```
 
-### Compiles and hot-reloads for development
-```
-yarn serve
+## Run tests
+
+```sh
+yarn run test
 ```
 
-### Compiles and minifies for production
-```
-yarn build
-```
+## Author
 
-### Lints and fixes files
-```
-yarn lint
-```
+👤 **Le TisseurDeToile**
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- Website: http://www.tisseurdetoile.net
+- Twitter: [@tisseurdetoile](https://twitter.com/tisseurdetoile)
+- Github: [@tisseurdetoile](https://github.com/tisseurdetoile)
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
+
+---
+
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
