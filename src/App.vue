@@ -1,5 +1,11 @@
 <template>
-  <CompactCalendar />
+  <div>
+    <div class="no-print">
+      <button v-on:click="minus">&#xFE64;</button> - {{ currentYear }} -
+      <button v-on:click="plus">&#xFE65;</button>
+    </div>
+    <CompactCalendar :year="currentYear" />
+  </div>
 </template>
 
 <script>
@@ -10,6 +16,36 @@ export default {
   components: {
     CompactCalendar,
   },
+  data: function() {
+    return {
+      selectedYear: null,
+    }
+  },
+  computed: {
+    currentYear: function() {
+      if (this.selectedYear === null) {
+        let dt = new Date()
+        return dt.getFullYear()
+      }
+      return this.selectedYear
+    },
+  },
+  methods: {
+    minus: function() {
+      if (this.selectedYear === null) {
+        this.selectedYear = this.currentYear
+      }
+
+      this.selectedYear--
+    },
+    plus: function() {
+      if (this.selectedYear === null) {
+        this.selectedYear = this.currentYear
+      }
+
+      this.selectedYear++
+    },
+  },
 }
 </script>
 
@@ -18,6 +54,14 @@ export default {
   margin: 0;
   padding: 0;
 }
+
+@media print {
+  .no-print,
+  .no-print * {
+    display: none !important;
+  }
+}
+
 #app {
   font-family: monospace, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
