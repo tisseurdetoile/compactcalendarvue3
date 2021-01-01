@@ -60,6 +60,11 @@ export default {
   .no-print * {
     display: none !important;
   }
+
+  body {
+    -webkit-print-color-adjust: exact; /*Chrome, Safari */
+    color-adjust: exact; /*Firefox*/
+  }
 }
 
 #app {
