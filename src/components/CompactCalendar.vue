@@ -1,13 +1,13 @@
 <template>
-  <Weeks :weeks="calendar.weeks" :mondayfirst="calendar.mondayfirst" />
+  <Calendar :weeks="calendar.weeks" :mondayfirst="calendar.mondayfirst" />
 </template>
 
 <script>
 import CalendarUtils from '../utils/CalendarUtils'
-import Weeks from './Weeks'
+import Calendar from './Calendar'
 export default {
   name: 'CompactCalendar',
-  components: { Weeks },
+  components: { Calendar },
   props: {
     year: Number,
   },
