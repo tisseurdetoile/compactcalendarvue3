@@ -36,6 +36,7 @@ li {
   display: inline;
   text-align: center;
   vertical-align: middle;
+  height: 1.1em;
 }
 
 li:nth-child(10n):after {
@@ -61,7 +62,7 @@ li.hday:nth-child(10n-2) {
 .hweek,
 .week {
   display: inline-block;
-  width: 1.8em;
+  width: 1.1em;
 }
 
 .hmonth,
