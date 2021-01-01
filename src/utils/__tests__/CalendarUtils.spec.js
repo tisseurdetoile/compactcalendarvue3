@@ -1,4 +1,4 @@
-import Calendar from '../Calendar'
+import CalendarUtils from '../CalendarUtils'
 
 describe('Calendar Test', () => {
   const MARS = 2
@@ -7,7 +7,7 @@ describe('Calendar Test', () => {
     let start = new Date('January 1, 2021 10:15:30')
     let stop = new Date('December 31, 2021 10:15:30')
 
-    let cal = new Calendar(start, stop)
+    let cal = new CalendarUtils(start, stop)
     let res = cal.listDaysFromMonday()
     expect(res.length).toEqual(53)
   })
@@ -16,7 +16,7 @@ describe('Calendar Test', () => {
     let start = new Date('January 1, 2020 10:15:30')
     let stop = new Date('December 31, 2020 10:15:30')
 
-    let cal = new Calendar(start, stop)
+    let cal = new CalendarUtils(start, stop)
     let res = cal.listDaysFromMonday()
 
     expect(res.length).toEqual(53)
@@ -26,7 +26,7 @@ describe('Calendar Test', () => {
     let start = new Date('November 18, 2020 10:15:30')
     let stop = new Date('November 19, 2020 10:15:30')
 
-    let cal = new Calendar(start, stop)
+    let cal = new CalendarUtils(start, stop)
     let res = cal.listDaysFromMonday()
 
     expect(res[0].length).toEqual(7)
@@ -36,7 +36,7 @@ describe('Calendar Test', () => {
     let start = new Date('February 25, 2020 10:15:30')
     let stop = new Date('February 26, 2020 10:15:30')
 
-    let cal = new Calendar(start, stop)
+    let cal = new CalendarUtils(start, stop)
     let res = cal.listDaysFromMonday()
 
     expect(res[0].length).toEqual(7)
@@ -47,7 +47,7 @@ describe('Calendar Test', () => {
     let start = new Date('February 25, 2019 10:15:30')
     let stop = new Date('February 26, 2019 10:15:30')
 
-    let cal = new Calendar(start, stop)
+    let cal = new CalendarUtils(start, stop)
     let res = cal.listDaysFromMonday()
 
     expect(res[0].length).toEqual(7)

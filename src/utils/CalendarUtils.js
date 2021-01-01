@@ -1,4 +1,4 @@
-export default class Calendar {
+export default class CalendarUtils {
   startDate
   endDate
   startMonday

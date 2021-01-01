@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Calendar from '../utils/Calendar'
+import CalendarUtils from '../utils/CalendarUtils'
 import Weeks from './Weeks'
 export default {
   name: 'CompactCalendar',
@@ -15,7 +15,7 @@ export default {
     calendar: function() {
       let dtStart = new Date(this.year, 0, 1, 13, 0, 0)
       let dtStop = new Date(this.year, 11, 31, 13, 0, 0)
-      let cal = new Calendar(dtStart, dtStop)
+      let cal = new CalendarUtils(dtStart, dtStop)
       return {
         weeks: cal.listDaysFromMonday(),
         mondayfirst: cal.getstartMonday(),

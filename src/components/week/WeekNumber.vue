@@ -5,14 +5,14 @@
 </template>
 
 <script>
-import Calendar from '../../utils/Calendar'
+import CalendarUtils from '../../utils/CalendarUtils'
 export default {
   props: {
     dayOfWeek: Date,
   },
   computed: {
     weekNumber: function() {
-      let numWeek = Calendar.getWeekNumber(this.dayOfWeek)[1]
+      let numWeek = CalendarUtils.getWeekNumber(this.dayOfWeek)[1]
       if (numWeek < 10) {
         return '0' + numWeek
       }
