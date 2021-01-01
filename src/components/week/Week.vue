@@ -17,7 +17,6 @@ import Day from './Day'
 export default {
   props: {
     week: Array,
-    weeksId: Number,
   },
   components: { WeekNumber, WeekMonth, Day },
   computed: {

@@ -1,13 +1,7 @@
 <template>
   <ul class="mondayfirst">
     <WeekHeader :week="weeks[0]" />
-    <Week
-      v-for="week in weeks"
-      :week="week"
-      :weeksId="week.id"
-      v-bind:key="week.id"
-    >
-    </Week>
+    <Week v-for="week in weeks" :week="week" v-bind:key="week.id"> </Week>
   </ul>
 </template>
 <script>
