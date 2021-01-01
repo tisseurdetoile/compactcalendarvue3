@@ -2,7 +2,7 @@
   <li class="header hweek">#</li>
   <li class="header hmonth">mois</li>
   <li class="header hday" v-for="day in week" :key="day.id">
-    {{ day.toLocaleDateString('fr-FR', { weekday: 'narrow' }) }}
+    <span>{{ day.toLocaleDateString(undefined, { weekday: 'narrow' }) }}</span>
   </li>
   <li></li>
 </template>

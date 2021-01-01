@@ -15,7 +15,7 @@ export default {
       const optionsMonth = {
         month: 'short',
       }
-      let shrtMonth = this.dayOfWeek.toLocaleDateString('fr-FR', optionsMonth)
+      let shrtMonth = this.dayOfWeek.toLocaleDateString(undefined, optionsMonth)
 
       if (shrtMonth.length < 6) {
         let pad = 5 - shrtMonth.length

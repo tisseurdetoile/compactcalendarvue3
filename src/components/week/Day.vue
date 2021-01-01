@@ -7,7 +7,9 @@
       endOfMonth: endOfMonth,
     }"
   >
-    {{ day.toLocaleDateString('fr-FR', { day: '2-digit' }) }}
+    <span>
+      {{ day.toLocaleDateString(undefined, { day: '2-digit' }) }}
+    </span>
   </li>
 </template>
 <script>
