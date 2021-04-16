@@ -15,7 +15,7 @@
             ><br />
             <a href="https://davidseah.com/blog/grid-all/">DavidSeah Blog</a>
             <br />
-            <a href="blog.tisseurdetoile.net">TisseurDeToile</a>
+            <a href="https://blog.tisseurdetoile.net">TisseurDeToile</a>
             <br />
             <a
               href="https://github.com/tisseurdetoile/compactcalendarvue3/issues"
