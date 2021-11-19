@@ -8,6 +8,32 @@ import Calendar from './Calendar'
 export default {
   name: 'CompactCalendar',
   components: { Calendar },
+  created() {
+    this.fetchData()
+  },
+    watch: {
+    // call again the method if the year change
+    'year': 'fetchData'
+  },
+  data: function () {
+    return {
+      resp: {}
+    }
+  },
+  methods: {
+    fetchData () {
+      let url = './fr_fr/' + this.year + '.json'
+      console.log(url)
+      fetch(url,  { method: 'get', headers: { 'content-type': 'application/json' }})
+      .then(response => {
+        console.log(response)
+        return response.json();
+      }, error =>{
+        console.log(error)
+        throw new Error('Something went wrong');
+    }).then(json => {this.resp = json})
+    }
+  },
   props: {
     year: Number,
   },
