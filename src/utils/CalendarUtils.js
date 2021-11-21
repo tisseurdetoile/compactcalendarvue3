@@ -1,3 +1,4 @@
+import { listWeekDaysBetweenDays } from "./DatesUtils.mjs"
 export default class CalendarUtils {
   startDate
   endDate
@@ -11,16 +12,6 @@ export default class CalendarUtils {
 
   getstartMonday() {
     return this.startMonday
-  }
-
-  addDays(date, days) {
-    var result = new Date(date)
-    result.setDate(result.getDate() + days)
-    return result
-  }
-
-  nextDay(date) {
-    return this.addDays(date, 1)
   }
 
   getStartWeekMonday(date) {
@@ -53,21 +44,7 @@ export default class CalendarUtils {
     const start = this.getStartWeekMonday(this.startDate)
     const end = this.getEndWeekSunday(this.endDate)
 
-    let currDay = new Date(start)
-    const dates = []
-    let ni = 0
-    let week = []
-    while (currDay <= end) {
-      week.push(new Date(currDay))
-      currDay = this.nextDay(currDay)
-
-      if (ni++ >= 6) {
-        dates.push(week)
-        week = []
-        ni = 0
-      }
-    }
-    return dates
+    return listWeekDaysBetweenDays(start, end)
   }
 
   static getWeekNumber(d) {
