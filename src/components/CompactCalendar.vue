@@ -26,11 +26,9 @@ export default {
   },
   methods: {
     fetchData () {
-      let url = './fr_fr/' + this.year + '.json'
-      console.log(url)
+      let url = `./${navigator.language}/${this.year}.json`
       fetch(url, { method: 'get', headers: { 'content-type': 'application/json' }})
       .then(response => {
-        console.log(response)
         return response.json();
       }, error =>{
         console.log("error1")
@@ -38,17 +36,17 @@ export default {
         throw new Error('Something went wrong');
     }).then(json => {
       this.holiday = json
-      //let days = listDaysBetweenDays (new Date(this.holiday.vacation.zone1[0].start), new Date(this.holiday.vacation.zone1[0].end))
       let days = this.holiday.vacation.zone1.flatMap(x => listDaysBetweenDays(new Date(x.start), new Date(x.end)))
 
       // -- TODO a revoir
       var rObj = {}
       days.map (day => {
         let year = day.getFullYear()
+        let floatDay = parseFloat(`${day.getMonth() + 1}.${day.toLocaleDateString(undefined, { day: '2-digit' })}`)
         if (Object.prototype.hasOwnProperty.call(rObj, year)) {
-          rObj[year].push(parseFloat(`${day.getMonth() + 1}.${day.toLocaleDateString(undefined, { day: '2-digit' })}`))
+          rObj[year].push(floatDay)
         } else {
-          rObj[year] = [parseFloat(`${day.getMonth() + 1}.${day.toLocaleDateString(undefined, { day: '2-digit' })}`)]
+          rObj[year] = [floatDay]
         }
         return rObj
       })
@@ -56,8 +54,7 @@ export default {
       this.vacations = rObj
 
     }, error => { 
-      console.log("error2")
-      console.log(error)
+      console.log(`no json data for ${url} error:>${error}<`)
       })
     }
   },
