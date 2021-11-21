@@ -58,13 +58,13 @@ export default {
 .firstDay {
   font-weight: bolder;
   background: linear-gradient(#9198e5, white);
-  border-left: solid 1px#9198e5;
+  border-left: solid 1px #9198e5;
 }
 .startOfMonth {
-  border-top: solid 1px#9198e5;
+  border-top: solid 1px #9198e5;
 }
 .endOfMonth {
-  border-bottom: solid 1px#9198e5;
+  border-bottom: solid 1px #9198e5;
 }
 
 .holyday {
