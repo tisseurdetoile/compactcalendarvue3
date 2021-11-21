@@ -52,7 +52,7 @@ export default {
 
 <style scoped>
 .vacation {
-  background: linear-gradient(white, lightgrey);
+  background: lightgrey;
 }
 
 .firstDay {
