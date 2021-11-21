@@ -1,10 +1,13 @@
 <template>
-  <Calendar :weeks="calendar.weeks" :mondayfirst="calendar.mondayfirst" />
-</template>
+  <Calendar :weeks="calendar.weeks" :vacations="vacations" :holidays="holiday.days" :mondayfirst="calendar.mondayfirst" />
+</template> 
 
 <script>
 import CalendarUtils from '../utils/CalendarUtils'
+import { listDaysBetweenDays } from '../utils/DatesUtils.mjs'
+
 import Calendar from './Calendar'
+
 export default {
   name: 'CompactCalendar',
   components: { Calendar },
@@ -17,27 +20,54 @@ export default {
   },
   data: function () {
     return {
-      resp: {}
+      holiday: {},
+      vacations: {}
     }
   },
   methods: {
     fetchData () {
       let url = './fr_fr/' + this.year + '.json'
       console.log(url)
-      fetch(url,  { method: 'get', headers: { 'content-type': 'application/json' }})
+      fetch(url, { method: 'get', headers: { 'content-type': 'application/json' }})
       .then(response => {
         console.log(response)
         return response.json();
       }, error =>{
+        console.log("error1")
         console.log(error)
         throw new Error('Something went wrong');
-    }).then(json => {this.resp = json})
+    }).then(json => {
+      this.holiday = json
+      //let days = listDaysBetweenDays (new Date(this.holiday.vacation.zone1[0].start), new Date(this.holiday.vacation.zone1[0].end))
+      let days = this.holiday.vacation.zone1.flatMap(x => listDaysBetweenDays(new Date(x.start), new Date(x.end)))
+
+      // -- TODO a revoir
+      var rObj = {}
+      days.map (day => {
+        let year = day.getFullYear()
+        if (Object.prototype.hasOwnProperty.call(rObj, year)) {
+          rObj[year].push(parseFloat(`${day.getMonth() + 1}.${day.toLocaleDateString(undefined, { day: '2-digit' })}`))
+        } else {
+          rObj[year] = [parseFloat(`${day.getMonth() + 1}.${day.toLocaleDateString(undefined, { day: '2-digit' })}`)]
+        }
+        return rObj
+      })
+
+      this.vacations = rObj
+
+    }, error => { 
+      console.log("error2")
+      console.log(error)
+      })
     }
   },
   props: {
     year: Number,
   },
   computed: {
+    test: function () {
+      return this.holiday.vacation.zone1.flatMap(x => listDaysBetweenDays(new Date(x.start), new Date(x.end)))
+    },
     calendar: function() {
       let dtStart = new Date(this.year, 0, 1, 13, 0, 0)
       let dtStop = new Date(this.year, 11, 31, 13, 0, 0)

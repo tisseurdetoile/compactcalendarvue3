@@ -6,6 +6,8 @@
     :day="day"
     :changedMonth="changedMonth"
     :key="day.id"
+    :holidays="this.holidays"
+    :vacations="this.vacations"
   ></Day>
   <li></li>
 </template>
@@ -17,6 +19,8 @@ import Day from './Day'
 export default {
   props: {
     week: Array,
+    holidays: Array,
+    vacations: Object
   },
   components: { WeekNumber, WeekMonth, Day },
   computed: {
