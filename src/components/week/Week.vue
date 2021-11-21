@@ -4,7 +4,7 @@
   />
   <WeekMonth 
     :day-of-week="lastDay" 
-    :changed-month="changedMonth" 
+    :changed-month="changedMonth"
   />
   <Day
     v-for="day in week"
