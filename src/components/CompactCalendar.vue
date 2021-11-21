@@ -1,5 +1,23 @@
 <template>
-  <Calendar :weeks="calendar.weeks" :vacations="vacations" :holidays="holiday.days" :mondayfirst="calendar.mondayfirst" />
+  <div  
+    v-for="zone in zones" 
+    :key="zone" 
+    class="no-print"
+  >
+    <input 
+      v-model="currZone" 
+      name="currZone"  
+      type="radio" 
+      :value="zone"
+    >
+    <label>{{ zone }}</label>
+  </div>
+  <Calendar 
+    :weeks="calendar.weeks" 
+    :vacations="vacations" 
+    :holidays="holiday.days" 
+    :mondayfirst="calendar.mondayfirst"
+  />
 </template> 
 
 <script>
@@ -11,32 +29,43 @@ import Calendar from './Calendar'
 export default {
   name: 'CompactCalendar',
   components: { Calendar },
-  created() {
-    this.fetchData()
-  },
-    watch: {
-    // call again the method if the year change
-    'year': 'fetchData'
-  },
+  props: {  
+    year: Number,
+  },  
   data: function () {
     return {
+      currZone: null,
+      zones: [],
       holiday: {},
       vacations: {}
     }
+  },  
+  computed: {
+    calendar: function() {
+      let dtStart = new Date(this.year, 0, 1, 13, 0, 0)
+      let dtStop = new Date(this.year, 11, 31, 13, 0, 0)
+      let cal = new CalendarUtils(dtStart, dtStop)
+      return {
+        weeks: cal.listDaysFromMonday(),
+        mondayfirst: cal.getstartMonday(),
+      }
+    },
+  },
+    watch: {
+    // call again the method if the year change
+    'year': 'fetchData',
+    'currZone': 'loadZone'
+  },    
+created() {
+    this.fetchData()
   },
   methods: {
-    fetchData () {
-      let url = `./${navigator.language}/${this.year}.json`
-      fetch(url, { method: 'get', headers: { 'content-type': 'application/json' }})
-      .then(response => {
-        return response.json();
-      }, error =>{
-        console.log("error1")
-        console.log(error)
-        throw new Error('Something went wrong');
-    }).then(json => {
-      this.holiday = json
-      let days = this.holiday.vacation.zone1.flatMap(x => listDaysBetweenDays(new Date(x.start), new Date(x.end)))
+    loadZone() {
+      if (this.currZone === null) {
+        this.currZone = this.zones[0]
+      }
+
+      let days = this.holiday.vacation[this.currZone].flatMap(x => listDaysBetweenDays(new Date(x.start), new Date(x.end)))
 
       // -- TODO a revoir
       var rObj = {}
@@ -52,28 +81,22 @@ export default {
       })
 
       this.vacations = rObj
-
-    }, error => { 
-      console.log(`no json data for ${url} error:>${error}<`)
-      })
+    },
+    fetchData () {
+      let url = `./${navigator.language}/${this.year}.json`
+      fetch(url, { method: 'get', headers: { 'content-type': 'application/json' }})
+      .then(response => {
+        return response.json();
+      }, error => {
+          console.log(error)
+          throw new Error('Something went wrong');
+    }).then(json => {
+      this.holiday = json
+      this.zones = Object.keys(this.holiday.vacation)
+      this.loadZone()
+        }, error => { console.log(`no json data for ${url} error:>${error}<`) }
+      )
     }
-  },
-  props: {
-    year: Number,
-  },
-  computed: {
-    test: function () {
-      return this.holiday.vacation.zone1.flatMap(x => listDaysBetweenDays(new Date(x.start), new Date(x.end)))
-    },
-    calendar: function() {
-      let dtStart = new Date(this.year, 0, 1, 13, 0, 0)
-      let dtStop = new Date(this.year, 11, 31, 13, 0, 0)
-      let cal = new CalendarUtils(dtStart, dtStop)
-      return {
-        weeks: cal.listDaysFromMonday(),
-        mondayfirst: cal.getstartMonday(),
-      }
-    },
   },
 }
 </script>

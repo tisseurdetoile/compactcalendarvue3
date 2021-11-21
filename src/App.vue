@@ -1,9 +1,13 @@
 <template>
   <div>
     <div class="no-print">
-      <button v-on:click="minus">&#xFE64;</button>
+      <button @click="minus">
+        &#xFE64;
+      </button>
       &nbsp;-&nbsp;<a :href="'./?year=' + currentYear">{{ currentYear }}</a>&nbsp;-&nbsp;
-      <button v-on:click="plus">&#xFE65;</button>
+      <button @click="plus">
+        &#xFE65;
+      </button>
     </div>
     <CompactCalendar :year="currentYear" />
 
@@ -11,26 +15,26 @@
       <div class="wrapper">
         <div class="footer-menu">
           <p>
-            <a href="https://davidseah.com/node/compact-calendar/"
-              >CompactCalendar</a
-            ><br />
+            <a 
+              href="https://davidseah.com/node/compact-calendar/"
+            >CompactCalendar</a>
+            <br>
             <a href="https://davidseah.com/blog/grid-all/">DavidSeah Blog</a>
-            <br />
+            <br>
             <a href="https://blog.tisseurdetoile.net">TisseurDeToile</a>
-            <br />
+            <br>
             <a
               href="https://github.com/tisseurdetoile/compactcalendarvue3/issues"
-              >An idea</a
-            >
+            >An idea</a>
           </p>
         </div>
 
         <div class="about">
           <div class="colophon">
             <p>
-              CompactCalendarVue is an Vue application <br />
+              CompactCalendarVue is an Vue application <br>
               CompactCalendar is a creation of
-              <a href="https://davidseah.com/">David Seah</a><br />
+              <a href="https://davidseah.com/">David Seah</a><br>
               Adapted in <a herf="https://vuejs.org/">Vue</a> by
               <a href="http://www.tisseurdetoile.net/">Le TisseurDeToile</a>
             </p>
@@ -65,17 +69,19 @@ export default {
     }
   },
   computed: {
+    parameters: function() {
+      return new URLSearchParams(window.location.search)
+    },
     currentYear: function() {
       if (this.selectedYear === null) {
-        let urlSearchParams = new URLSearchParams(window.location.search);
         let urlYear = null
 
-        if (urlSearchParams.get("year") !== null) {
-          urlYear = parseInt(urlSearchParams.get("year"))
+        if (this.parameters.get("year") !== null) {
+          urlYear = parseInt(this.parameters.get("year"))
         }
 
-        if (urlSearchParams.get("annee") !== null) {
-          urlYear = parseInt(urlSearchParams.get("annee"))
+        if (this.parameters.get("annee") !== null) {
+          urlYear = parseInt(this.parameters.get("annee"))
         }
 
        if (urlYear !== null) {
@@ -112,7 +118,6 @@ export default {
   margin: 0;
   padding: 0;
 }
-
 
 #app {
   font-family: monospace, Helvetica, Arial, sans-serif;

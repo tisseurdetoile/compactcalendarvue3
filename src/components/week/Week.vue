@@ -1,15 +1,20 @@
 <template>
-  <WeekNumber :dayOfWeek="lastDay"></WeekNumber>
-  <WeekMonth :dayOfWeek="lastDay" :changedMonth="changedMonth"></WeekMonth>
+  <WeekNumber 
+    :day-of-week="lastDay" 
+  />
+  <WeekMonth 
+    :day-of-week="lastDay" 
+    :changed-month="changedMonth" 
+  />
   <Day
     v-for="day in week"
-    :day="day"
-    :changedMonth="changedMonth"
     :key="day.id"
-    :holidays="this.holidays"
-    :vacations="this.vacations"
-  ></Day>
-  <li></li>
+    :day="day"
+    :changed-month="changedMonth"
+    :holidays="holidays"
+    :vacations="vacations"
+  />
+  <li />
 </template>
 <script>
 import WeekNumber from './WeekNumber'
@@ -17,12 +22,12 @@ import WeekMonth from './WeekMonth'
 import Day from './Day'
 
 export default {
+  components: { WeekNumber, WeekMonth, Day },  
   props: {
     week: Array,
     holidays: Array,
     vacations: Object
   },
-  components: { WeekNumber, WeekMonth, Day },
   computed: {
     changedMonth: function() {
       return this.week.find((day) => day.getDate() == 1) !== undefined
