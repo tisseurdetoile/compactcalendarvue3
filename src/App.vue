@@ -1,7 +1,8 @@
 <template>
   <div>
     <div class="no-print">
-      <button v-on:click="minus">&#xFE64;</button> - {{ currentYear }} -
+      <button v-on:click="minus">&#xFE64;</button>
+      &nbsp;-&nbsp;<a :href="'./?year=' + currentYear">{{ currentYear }}</a>&nbsp;-&nbsp;
       <button v-on:click="plus">&#xFE65;</button>
     </div>
     <CompactCalendar :year="currentYear" />
@@ -66,6 +67,21 @@ export default {
   computed: {
     currentYear: function() {
       if (this.selectedYear === null) {
+        let urlSearchParams = new URLSearchParams(window.location.search);
+        let urlYear = null
+
+        if (urlSearchParams.get("year") !== null) {
+          urlYear = parseInt(urlSearchParams.get("year"))
+        }
+
+        if (urlSearchParams.get("annee") !== null) {
+          urlYear = parseInt(urlSearchParams.get("annee"))
+        }
+
+       if (urlYear !== null) {
+         return urlYear
+       }
+
         let dt = new Date()
         return dt.getFullYear()
       }
@@ -105,8 +121,6 @@ export default {
   text-align: left;
   font-size: 1em;
 }
-
-
 
 footer {
   display: table-row;
