@@ -97,17 +97,6 @@ export default {
   padding: 0;
 }
 
-@media print {
-  .no-print,
-  .no-print * {
-    display: none !important;
-  }
-
-  body {
-    -webkit-print-color-adjust: exact; /*Chrome, Safari */
-    color-adjust: exact; /*Firefox*/
-  }
-}
 
 #app {
   font-family: monospace, Helvetica, Arial, sans-serif;
@@ -116,6 +105,8 @@ export default {
   text-align: left;
   font-size: 1em;
 }
+
+
 
 footer {
   display: table-row;
@@ -166,5 +157,30 @@ footer .wrapper .colophon {
 footer .wrapper .copyright {
   margin-top: 24px;
   width: 500px;
+}
+
+@media print {
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  .no-print,
+  .no-print * {
+    display: none !important;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact; /*Chrome, Safari */
+    color-adjust: exact; /*Firefox*/
+  }
+
+  #app {
+  font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: left;
+  font-size: 1em;
+  }
 }
 </style>
