@@ -1,5 +1,8 @@
 <template>
-  <li class="week" :class="{ past: !elaspedDate }">
+  <li  
+    :class="{ past: !elaspedDate }"
+    class="week"
+  >
     {{ weekNumber }}
   </li>
 </template>

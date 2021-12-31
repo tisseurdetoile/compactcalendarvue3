@@ -1,15 +1,47 @@
 <template>
-  <Calendar :weeks="calendar.weeks" :mondayfirst="calendar.mondayfirst" />
+  <div
+    v-for="zone in zones"
+    :key="zone"
+    class="no-print"
+  >
+    <input
+      v-model="currZone"
+      name="currZone"
+      type="radio"
+      :value="zone"
+    >
+    <label>{{ zone }}</label>
+  </div>
+  <Calendar
+    :weeks="calendar.weeks"
+    :vacations="vacations"
+    :holidays="holiday.days"
+    :mondayfirst="calendar.mondayfirst"
+  />
 </template>
 
 <script>
 import CalendarUtils from '../utils/CalendarUtils'
+import { listDaysBetweenDays } from '../utils/DatesUtils.mjs'
+
 import Calendar from './Calendar'
+
 export default {
   name: 'CompactCalendar',
   components: { Calendar },
   props: {
-    year: Number,
+    year: {
+      type: Number,
+      default: new Date().getFullYear()
+      },
+  },
+  data: function () {
+    return {
+      currZone: null,
+      zones: [],
+      holiday: {},
+      vacations: {}
+    }
   },
   computed: {
     calendar: function() {
@@ -21,6 +53,52 @@ export default {
         mondayfirst: cal.getstartMonday(),
       }
     },
+  },
+    watch: {
+    // call again the method if the year change
+    'year': 'fetchData',
+    'currZone': 'loadZone'
+  },
+created() {
+    this.fetchData()
+  },
+  methods: {
+    loadZone() {
+      if (this.currZone === null) {
+        this.currZone = this.zones[0]
+      }
+
+      let days = this.holiday.vacation[this.currZone].flatMap(x => listDaysBetweenDays(new Date(x.start), new Date(x.end)))
+
+      // -- TODO a revoir
+      var rObj = {}
+      days.map (day => {
+        let year = day.getFullYear()
+        let floatDay = parseFloat(`${day.getMonth() + 1}.${day.toLocaleDateString(undefined, { day: '2-digit' })}`)
+        if (Object.prototype.hasOwnProperty.call(rObj, year)) {
+          rObj[year].push(floatDay)
+        } else {
+          rObj[year] = [floatDay]
+        }
+        return rObj
+      })
+
+      this.vacations = rObj
+    },
+    fetchData () {
+      let url = `./${navigator.language.slice(-2).toLowerCase()}/${this.year}.json`
+      fetch(url, { method: 'get', headers: { 'content-type': 'application/json' }})
+      .then(response => {
+        return response.json();
+      }, error => {
+          throw new Error(`Something went wrong e=${error}`);
+    }).then(json => {
+      this.holiday = json
+      this.zones = Object.keys(this.holiday.vacation)
+      this.loadZone()
+        }, error => { console.log(`no json data for ${url} error:>${error}<`) }
+      )
+    }
   },
 }
 </script>

@@ -1,8 +1,13 @@
 <template>
   <div>
     <div class="no-print">
-      <button v-on:click="minus">&#xFE64;</button> - {{ currentYear }} -
-      <button v-on:click="plus">&#xFE65;</button>
+      <button @click="minus">
+        &#xFE64;
+      </button>
+      &nbsp;-&nbsp;<a :href="'./?year=' + currentYear">{{ currentYear }}</a>&nbsp;-&nbsp;
+      <button @click="plus">
+        &#xFE65;
+      </button>
     </div>
     <CompactCalendar :year="currentYear" />
 
@@ -10,26 +15,26 @@
       <div class="wrapper">
         <div class="footer-menu">
           <p>
-            <a href="https://davidseah.com/node/compact-calendar/"
-              >CompactCalendar</a
-            ><br />
+            <a 
+              href="https://davidseah.com/node/compact-calendar/"
+            >CompactCalendar</a>
+            <br>
             <a href="https://davidseah.com/blog/grid-all/">DavidSeah Blog</a>
-            <br />
+            <br>
             <a href="https://blog.tisseurdetoile.net">TisseurDeToile</a>
-            <br />
+            <br>
             <a
               href="https://github.com/tisseurdetoile/compactcalendarvue3/issues"
-              >An idea</a
-            >
+            >An idea</a>
           </p>
         </div>
 
         <div class="about">
           <div class="colophon">
             <p>
-              CompactCalendarVue is an Vue application <br />
+              CompactCalendarVue is an Vue application <br>
               CompactCalendar is a creation of
-              <a href="https://davidseah.com/">David Seah</a><br />
+              <a href="https://davidseah.com/">David Seah</a><br>
               Adapted in <a herf="https://vuejs.org/">Vue</a> by
               <a href="http://www.tisseurdetoile.net/">Le TisseurDeToile</a>
             </p>
@@ -64,8 +69,25 @@ export default {
     }
   },
   computed: {
+    parameters: function() {
+      return new URLSearchParams(window.location.search)
+    },
     currentYear: function() {
       if (this.selectedYear === null) {
+        let urlYear = null
+
+        if (this.parameters.get("year") !== null) {
+          urlYear = parseInt(this.parameters.get("year"))
+        }
+
+        if (this.parameters.get("annee") !== null) {
+          urlYear = parseInt(this.parameters.get("annee"))
+        }
+
+       if (urlYear !== null) {
+         return urlYear
+       }
+
         let dt = new Date()
         return dt.getFullYear()
       }
@@ -95,18 +117,6 @@ export default {
 * {
   margin: 0;
   padding: 0;
-}
-
-@media print {
-  .no-print,
-  .no-print * {
-    display: none !important;
-  }
-
-  body {
-    -webkit-print-color-adjust: exact; /*Chrome, Safari */
-    color-adjust: exact; /*Firefox*/
-  }
 }
 
 #app {
@@ -166,5 +176,30 @@ footer .wrapper .colophon {
 footer .wrapper .copyright {
   margin-top: 24px;
   width: 500px;
+}
+
+@media print {
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  .no-print,
+  .no-print * {
+    display: none !important;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact; /*Chrome, Safari */
+    color-adjust: exact; /*Firefox*/
+  }
+
+  #app {
+  font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: left;
+  font-size: 1em;
+  }
 }
 </style>

@@ -1,15 +1,28 @@
 <template>
-  <li class="header hweek">#</li>
-  <li class="header hmonth">mois</li>
-  <li class="header hday" v-for="day in week" :key="day.id">
+  <li
+    class="header hweek"
+  >
+    #
+  </li>
+  <li class="header hmonth">
+    mois
+  </li>
+  <li
+    v-for="day in week"
+    :key="day.id"
+    class="header hday"
+  >
     <span>{{ day.toLocaleDateString(undefined, { weekday: 'narrow' }) }}</span>
   </li>
-  <li></li>
+  <li />
 </template>
 <script>
 export default {
   props: {
-    week: Array,
+    week: {
+      type: Array,
+      default: () => []
+    }
   },
   computed: {
     changedMonth: function() {

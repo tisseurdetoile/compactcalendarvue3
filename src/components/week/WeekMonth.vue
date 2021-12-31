@@ -1,5 +1,8 @@
 <template>
-  <li class="month" :class="{ hidden: !changedMonth }">
+  <li 
+    :class="{ hidden: !changedMonth }"
+    class="month"
+  >
     {{ weekMonth }}
   </li>
 </template>
