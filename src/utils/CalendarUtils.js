@@ -1,8 +1,5 @@
 import { listWeekDaysBetweenDays } from "./DatesUtils.mjs"
 export default class CalendarUtils {
-  startDate
-  endDate
-  startMonday
 
   constructor(startDate, endDate, startMonday = true) {
     this.startDate = startDate
