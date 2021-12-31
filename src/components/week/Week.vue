@@ -1,9 +1,9 @@
 <template>
-  <WeekNumber 
-    :day-of-week="lastDay" 
+  <WeekNumber
+    :day-of-week="lastDay"
   />
-  <WeekMonth 
-    :day-of-week="lastDay" 
+  <WeekMonth
+    :day-of-week="lastDay"
     :changed-month="changedMonth"
   />
   <Day
@@ -22,11 +22,20 @@ import WeekMonth from './WeekMonth'
 import Day from './Day'
 
 export default {
-  components: { WeekNumber, WeekMonth, Day },  
+  components: { WeekNumber, WeekMonth, Day },
   props: {
-    week: Array,
-    holidays: Array,
-    vacations: Object
+    week: {
+      type: Array,
+      default: () => []
+    },
+    holidays: {
+      type: Array,
+      default: () => []
+    },
+    vacations: {
+      type: Object,
+      default: () => {}
+    },
   },
   computed: {
     changedMonth: function() {

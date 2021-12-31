@@ -7,7 +7,8 @@
       endOfMonth: endOfMonth,
       holyday: isHolyDay,
       vacation: isVacation
-    }">
+    }"
+  >
     <span>
       {{ day.toLocaleDateString(undefined, { day: '2-digit' }) }}
     </span>
@@ -18,20 +19,25 @@ export default {
   props: {
     day: Date,
     changedMonth: Boolean,
-    vacations: Object,
-    holidays: Array
-
+    vacations: {
+      type: Object,
+      default: () => {}
+    },
+    holidays: {
+      type: Array,
+      default: () => []
+    }
   },
   computed: {
     isVacation: function(){
       let floatDate = parseFloat(`${this.day.getMonth() + 1}.${this.day.toLocaleDateString(undefined, { day: '2-digit' })}`)
-      
+
       if (Object.prototype.hasOwnProperty.call(this.vacations, this.day.getFullYear())) {
           return this.vacations[this.day.getFullYear()].includes(floatDate)
       }
 
       return false
-      
+
     },
     isHolyDay: function() {
       let floatDate = parseFloat(`${this.day.getMonth() + 1}.${this.day.toLocaleDateString(undefined, { day: '2-digit' })}`)
