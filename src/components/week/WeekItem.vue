@@ -6,7 +6,7 @@
     :day-of-week="lastDay"
     :changed-month="changedMonth"
   />
-  <Day
+  <DayItem
     v-for="day in week"
     :key="day.id"
     :day="day"
@@ -19,10 +19,10 @@
 <script>
 import WeekNumber from './WeekNumber'
 import WeekMonth from './WeekMonth'
-import Day from './Day'
+import DayItem from './DayItem'
 
 export default {
-  components: { WeekNumber, WeekMonth, Day },
+  components: { WeekNumber, WeekMonth, DayItem },
   props: {
     week: {
       type: Array,

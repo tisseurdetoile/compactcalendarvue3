@@ -1,22 +1,22 @@
 <template>
   <ul class="mondayfirst">
     <WeekHeader :week="weeks[0]" />
-    <Week 
+    <WeekItem
       v-for="week in weeks"
       :key="week.id"
-      :week="week" 
-      :vacations="vacations" 
-      :holidays="holidays" 
+      :week="week"
+      :vacations="vacations"
+      :holidays="holidays"
     />
   </ul>
 </template>
 <script>
-import Week from './week/Week'
+import WeekItem from './week/WeekItem'
 import WeekHeader from './week/WeekHeader'
 export default {
-  components: { Week, WeekHeader },
+  components: { WeekItem, WeekHeader },
   props: {
-    mondayfirst: Boolean,    
+    mondayfirst: Boolean,
     weeks: {
       type: Array,
       default: function() {

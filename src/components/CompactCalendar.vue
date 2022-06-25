@@ -12,7 +12,7 @@
     >
     <label>{{ zone }}</label>
   </div>
-  <Calendar
+  <CalendarItem
     :weeks="calendar.weeks"
     :vacations="vacations"
     :holidays="holiday.days"
@@ -24,11 +24,11 @@
 import CalendarUtils from '../utils/CalendarUtils'
 import { listDaysBetweenDays } from '../utils/DatesUtils.mjs'
 
-import Calendar from './Calendar'
+import CalendarItem from './CalendarItem'
 
 export default {
   name: 'CompactCalendar',
-  components: { Calendar },
+  components: { CalendarItem },
   props: {
     year: {
       type: Number,

@@ -1,14 +1,20 @@
 <template>
   <div>
     <div>
-      <button class="no-print" @click="minus">
+      <button
+        class="no-print"
+        @click="minus"
+      >
         &#xFE64;
       </button>
       &nbsp;-&nbsp;<a :href="'./?year=' + currentYear">
         {{ currentYear }}
       </a>
       &nbsp;-&nbsp;
-      <button class="no-print" @click="plus">
+      <button
+        class="no-print"
+        @click="plus"
+      >
         &#xFE65;
       </button>
     </div>
@@ -21,24 +27,25 @@
             <a href="https://davidseah.com/node/compact-calendar/">
               CompactCalendar
             </a>
-            <br />
+            <br>
             <a href="https://davidseah.com/blog/grid-all/">DavidSeah Blog</a>
-            <br />
+            <br>
             <a href="https://blog.tisseurdetoile.net">TisseurDeToile</a>
-            <br />
+            <br>
             <a
               href="https://github.com/tisseurdetoile/compactcalendarvue3/issues"
-              >An idea</a
             >
+              An idea
+            </a>
           </p>
         </div>
 
         <div class="about">
           <div class="colophon">
             <p>
-              CompactCalendarVue is an Vue application <br />
+              CompactCalendarVue is an Vue application <br>
               CompactCalendar is a creation of
-              <a href="https://davidseah.com/">David Seah</a><br />
+              <a href="https://davidseah.com/">David Seah</a><br>
               Adapted in <a herf="https://vuejs.org/">Vue</a> by
               <a href="http://www.tisseurdetoile.net/">Le TisseurDeToile</a>
             </p>
@@ -195,7 +202,7 @@ footer .wrapper .copyright {
 
   body {
     -webkit-print-color-adjust: exact; /*Chrome, Safari */
-    color-adjust: exact; /*Firefox*/
+    print-color-adjust: exact; /*Firefox*/
   }
 
   #app {
