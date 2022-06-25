@@ -1,11 +1,14 @@
 <template>
   <div>
-    <div class="no-print">
-      <button @click="minus">
+    <div>
+      <button class="no-print" @click="minus">
         &#xFE64;
       </button>
-      &nbsp;-&nbsp;<a :href="'./?year=' + currentYear">{{ currentYear }}</a>&nbsp;-&nbsp;
-      <button @click="plus">
+      &nbsp;-&nbsp;<a :href="'./?year=' + currentYear">
+        {{ currentYear }}
+      </a>
+      &nbsp;-&nbsp;
+      <button class="no-print" @click="plus">
         &#xFE65;
       </button>
     </div>
@@ -15,26 +18,27 @@
       <div class="wrapper">
         <div class="footer-menu">
           <p>
-            <a 
-              href="https://davidseah.com/node/compact-calendar/"
-            >CompactCalendar</a>
-            <br>
+            <a href="https://davidseah.com/node/compact-calendar/">
+              CompactCalendar
+            </a>
+            <br />
             <a href="https://davidseah.com/blog/grid-all/">DavidSeah Blog</a>
-            <br>
+            <br />
             <a href="https://blog.tisseurdetoile.net">TisseurDeToile</a>
-            <br>
+            <br />
             <a
               href="https://github.com/tisseurdetoile/compactcalendarvue3/issues"
-            >An idea</a>
+              >An idea</a
+            >
           </p>
         </div>
 
         <div class="about">
           <div class="colophon">
             <p>
-              CompactCalendarVue is an Vue application <br>
+              CompactCalendarVue is an Vue application <br />
               CompactCalendar is a creation of
-              <a href="https://davidseah.com/">David Seah</a><br>
+              <a href="https://davidseah.com/">David Seah</a><br />
               Adapted in <a herf="https://vuejs.org/">Vue</a> by
               <a href="http://www.tisseurdetoile.net/">Le TisseurDeToile</a>
             </p>
@@ -76,17 +80,17 @@ export default {
       if (this.selectedYear === null) {
         let urlYear = null
 
-        if (this.parameters.get("year") !== null) {
-          urlYear = parseInt(this.parameters.get("year"))
+        if (this.parameters.get('year') !== null) {
+          urlYear = parseInt(this.parameters.get('year'))
         }
 
-        if (this.parameters.get("annee") !== null) {
-          urlYear = parseInt(this.parameters.get("annee"))
+        if (this.parameters.get('annee') !== null) {
+          urlYear = parseInt(this.parameters.get('annee'))
         }
 
-       if (urlYear !== null) {
-         return urlYear
-       }
+        if (urlYear !== null) {
+          return urlYear
+        }
 
         let dt = new Date()
         return dt.getFullYear()
@@ -195,11 +199,11 @@ footer .wrapper .copyright {
   }
 
   #app {
-  font-family: sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: left;
-  font-size: 1em;
+    font-family: sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: left;
+    font-size: 1em;
   }
 }
 </style>
