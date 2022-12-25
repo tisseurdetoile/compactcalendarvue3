@@ -1,8 +1,5 @@
 <template>
-  <li 
-    :class="{ hidden: !changedMonth }"
-    class="month"
-  >
+  <li :class="{ hidden: !changedMonth }" class="month">
     {{ weekMonth }}
   </li>
 </template>
@@ -14,22 +11,25 @@ export default {
     changedMonth: Boolean,
   },
   computed: {
-    weekMonth: function() {
+    weekMonth: function () {
       const optionsMonth = {
-        month: 'short',
-      }
-      let shrtMonth = this.dayOfWeek.toLocaleDateString(undefined, optionsMonth)
+        month: "short",
+      };
+      let shrtMonth = this.dayOfWeek.toLocaleDateString(
+        undefined,
+        optionsMonth
+      );
 
       if (shrtMonth.length < 6) {
-        let pad = 5 - shrtMonth.length
+        let pad = 5 - shrtMonth.length;
 
-        let space = ' '.repeat(pad)
-        return shrtMonth + space
+        let space = " ".repeat(pad);
+        return shrtMonth + space;
       }
-      return shrtMonth
+      return shrtMonth;
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped></style>

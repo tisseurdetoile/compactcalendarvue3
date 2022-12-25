@@ -6,11 +6,11 @@
       startOfMonth: startOfMonth,
       endOfMonth: endOfMonth,
       holyday: isHolyDay,
-      vacation: isVacation
+      vacation: isVacation,
     }"
   >
     <span>
-      {{ day.toLocaleDateString(undefined, { day: '2-digit' }) }}
+      {{ day.toLocaleDateString(undefined, { day: "2-digit" }) }}
     </span>
   </li>
 </template>
@@ -21,39 +21,55 @@ export default {
     changedMonth: Boolean,
     vacations: {
       type: Object,
-      default: () => {}
+      default: () => {
+        return {};
+      },
     },
     holidays: {
       type: Array,
-      default: () => []
-    }
+      default: () => {
+        return [];
+      },
+    },
   },
   computed: {
-    isVacation: function(){
-      let floatDate = parseFloat(`${this.day.getMonth() + 1}.${this.day.toLocaleDateString(undefined, { day: '2-digit' })}`)
+    isVacation: function () {
+      let floatDate = parseFloat(
+        `${this.day.getMonth() + 1}.${this.day.toLocaleDateString(undefined, {
+          day: "2-digit",
+        })}`
+      );
 
-      if (Object.prototype.hasOwnProperty.call(this.vacations, this.day.getFullYear())) {
-          return this.vacations[this.day.getFullYear()].includes(floatDate)
+      if (
+        Object.prototype.hasOwnProperty.call(
+          this.vacations,
+          this.day.getFullYear()
+        )
+      ) {
+        return this.vacations[this.day.getFullYear()].includes(floatDate);
       }
 
-      return false
-
+      return false;
     },
-    isHolyDay: function() {
-      let floatDate = parseFloat(`${this.day.getMonth() + 1}.${this.day.toLocaleDateString(undefined, { day: '2-digit' })}`)
-      return this.holidays.includes(floatDate)
+    isHolyDay: function () {
+      let floatDate = parseFloat(
+        `${this.day.getMonth() + 1}.${this.day.toLocaleDateString(undefined, {
+          day: "2-digit",
+        })}`
+      );
+      return this.holidays.includes(floatDate);
     },
-    firstDayOfMonth: function() {
-      return this.day.getDate() === 1
+    firstDayOfMonth: function () {
+      return this.day.getDate() === 1;
     },
-    startOfMonth: function() {
-      return this.day.getDate() <= 7 && this.changedMonth
+    startOfMonth: function () {
+      return this.day.getDate() <= 7 && this.changedMonth;
     },
-    endOfMonth: function() {
-      return this.day.getDate() > 20 && this.changedMonth
+    endOfMonth: function () {
+      return this.day.getDate() > 20 && this.changedMonth;
     },
   },
-}
+};
 </script>
 
 <style scoped>

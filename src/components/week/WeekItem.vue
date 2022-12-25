@@ -21,15 +21,21 @@ export default {
   props: {
     week: {
       type: Array,
-      default: () => [],
+      default: () => {
+        return [];
+      },
     },
     holidays: {
       type: Array,
-      default: () => [],
+      default: () => {
+        return [];
+      },
     },
     vacations: {
       type: Object,
-      default: () => {},
+      default: () => {
+        return {};
+      },
     },
   },
   computed: {
@@ -44,5 +50,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>
