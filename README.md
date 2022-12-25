@@ -1,16 +1,21 @@
-# testproject
+# Welcome to compactcalendarvue3 👋
 
-This template should help get you started developing with Vue 3 in Vite.
+![Version](https://img.shields.io/badge/version-0.3.0-blue.svg?cacheSeconds=2592000)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)
+[![Twitter: tisseurdetoile](https://img.shields.io/twitter/follow/tisseurdetoile.svg?style=social)](https://twitter.com/tisseurdetoile)
+[![Mastodon: tisseurdetoile](https://img.shields.io/mastodon/follow/000006796?domain=https%3A%2F%2Fframapiaf.org%2F&style=social)](https://framapiaf.org/@Tisseurdetoile)
 
-## Recommended IDE Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+> An compactCalendar implementation in Vue3.
+> The compactCalendar of @daveseah but in Vue3
 
-## Customize configuration
+### 🏠 [Homepage](https://github.com/tisseurdetoile/compactcalendarvue3)
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+### ✨ [Demo](http://github.tisseurdetoile.net/compactcalendarvue3/)
 
-## Project Setup
+## Install Test & Run
+
+### Project Setup
 
 ```sh
 npm install
@@ -34,24 +39,18 @@ npm run build
 npm run test:unit
 ```
 
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
+## Author
 
-```sh
-npm run test:e2e:dev
-```
+👤 **Le TisseurDeToile**
 
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
+- Website: <http://www.tisseurdetoile.net>
+- Twitter: [@tisseurdetoile](https://twitter.com/tisseurdetoile)
+- Github: [@tisseurdetoile](https://github.com/tisseurdetoile)
 
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
+## Show your support
 
-```sh
-npm run build
-npm run test:e2e
-```
+Give a ⭐️ if this project helped you!
 
-### Lint with [ESLint](https://eslint.org/)
+---
 
-```sh
-npm run lint
-```
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
