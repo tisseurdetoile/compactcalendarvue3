@@ -1,18 +1,9 @@
 <template>
-  <div
-    v-for="zone in zones"
-    :key="zone"
-    class="no-print"
-  >
-    <input
-      v-model="currZone"
-      name="currZone"
-      type="radio"
-      :value="zone"
-    >
+  <div v-for="zone in zones" :key="zone" class="no-print">
+    <input v-model="currZone" name="currZone" type="radio" :value="zone" />
     <label>{{ zone }}</label>
   </div>
-  <Calendar
+  <CalendarItem
     :weeks="calendar.weeks"
     :vacations="vacations"
     :holidays="holiday.days"
@@ -21,86 +12,105 @@
 </template>
 
 <script>
-import CalendarUtils from '../utils/CalendarUtils'
-import { listDaysBetweenDays } from '../utils/DatesUtils.mjs'
+import CalendarUtils from "../utils/CalendarUtils.js";
+import { listDaysBetweenDays } from "../utils/DatesUtils.mjs";
 
-import Calendar from './Calendar'
+import CalendarItem from "./CalendarItem.vue";
 
 export default {
-  name: 'CompactCalendar',
-  components: { Calendar },
+  name: "CompactCalendar",
+  components: { CalendarItem },
   props: {
     year: {
       type: Number,
-      default: new Date().getFullYear()
-      },
+      default: new Date().getFullYear(),
+    },
   },
   data: function () {
     return {
       currZone: null,
       zones: [],
       holiday: {},
-      vacations: {}
-    }
+      vacations: {},
+    };
   },
   computed: {
-    calendar: function() {
-      let dtStart = new Date(this.year, 0, 1, 13, 0, 0)
-      let dtStop = new Date(this.year, 11, 31, 13, 0, 0)
-      let cal = new CalendarUtils(dtStart, dtStop)
+    calendar: function () {
+      let dtStart = new Date(this.year, 0, 1, 13, 0, 0);
+      let dtStop = new Date(this.year, 11, 31, 13, 0, 0);
+      let cal = new CalendarUtils(dtStart, dtStop);
       return {
         weeks: cal.listDaysFromMonday(),
         mondayfirst: cal.getstartMonday(),
-      }
+      };
     },
   },
-    watch: {
+  watch: {
     // call again the method if the year change
-    'year': 'fetchData',
-    'currZone': 'loadZone'
+    year: "fetchData",
+    currZone: "loadZone",
   },
-created() {
-    this.fetchData()
+  created() {
+    this.fetchData();
   },
   methods: {
     loadZone() {
       if (this.currZone === null) {
-        this.currZone = this.zones[0]
+        this.currZone = this.zones[0];
       }
 
-      let days = this.holiday.vacation[this.currZone].flatMap(x => listDaysBetweenDays(new Date(x.start), new Date(x.end)))
+      let days = this.holiday.vacation[this.currZone].flatMap((x) =>
+        listDaysBetweenDays(new Date(x.start), new Date(x.end))
+      );
 
       // -- TODO a revoir
-      var rObj = {}
-      days.map (day => {
-        let year = day.getFullYear()
-        let floatDay = parseFloat(`${day.getMonth() + 1}.${day.toLocaleDateString(undefined, { day: '2-digit' })}`)
+      var rObj = {};
+      days.map((day) => {
+        let year = day.getFullYear();
+        let floatDay = parseFloat(
+          `${day.getMonth() + 1}.${day.toLocaleDateString(undefined, {
+            day: "2-digit",
+          })}`
+        );
         if (Object.prototype.hasOwnProperty.call(rObj, year)) {
-          rObj[year].push(floatDay)
+          rObj[year].push(floatDay);
         } else {
-          rObj[year] = [floatDay]
+          rObj[year] = [floatDay];
         }
-        return rObj
-      })
+        return rObj;
+      });
 
-      this.vacations = rObj
+      this.vacations = rObj;
     },
-    fetchData () {
-      let url = `./${navigator.language.slice(-2).toLowerCase()}/${this.year}.json`
-      fetch(url, { method: 'get', headers: { 'content-type': 'application/json' }})
-      .then(response => {
-        return response.json();
-      }, error => {
-          throw new Error(`Something went wrong e=${error}`);
-    }).then(json => {
-      this.holiday = json
-      this.zones = Object.keys(this.holiday.vacation)
-      this.loadZone()
-        }, error => { console.log(`no json data for ${url} error:>${error}<`) }
-      )
-    }
+    fetchData() {
+      let url = `./${navigator.language.slice(-2).toLowerCase()}/${
+        this.year
+      }.json`;
+      fetch(url, {
+        method: "get",
+        headers: { "content-type": "application/json" },
+      })
+        .then(
+          (response) => {
+            return response.json();
+          },
+          (error) => {
+            throw new Error(`Something went wrong e=${error}`);
+          }
+        )
+        .then(
+          (json) => {
+            this.holiday = json;
+            this.zones = Object.keys(this.holiday.vacation);
+            this.loadZone();
+          },
+          (error) => {
+            console.log(`no json data for ${url} error:>${error}<`);
+          }
+        );
+    },
   },
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -119,7 +129,7 @@ li {
 
 li:nth-child(10n):after {
   display: block;
-  content: '';
+  content: "";
 }
 
 .mondayfirst li:nth-child(10n-1),

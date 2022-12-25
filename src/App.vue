@@ -1,16 +1,12 @@
 <template>
   <div>
     <div>
-      <button class="no-print" @click="minus">
-        &#xFE64;
-      </button>
+      <button class="no-print" @click="minus">&#xFE64;</button>
       &nbsp;-&nbsp;<a :href="'./?year=' + currentYear">
         {{ currentYear }}
       </a>
       &nbsp;-&nbsp;
-      <button class="no-print" @click="plus">
-        &#xFE65;
-      </button>
+      <button class="no-print" @click="plus">&#xFE65;</button>
     </div>
     <CompactCalendar :year="currentYear" />
 
@@ -28,8 +24,9 @@
             <br />
             <a
               href="https://github.com/tisseurdetoile/compactcalendarvue3/issues"
-              >An idea</a
             >
+              An idea
+            </a>
           </p>
         </div>
 
@@ -45,11 +42,11 @@
           </div>
           <div class="copyright">
             <p>
-              © 2021
+              © 2021-2023
               <a href="https://davidseah.com/">David Seah</a>
             </p>
             <p>
-              © 2021
+              © 2021-2023
               <a href="http://www.tisseurdetoile.net/">Le TisseurDeToile</a>
             </p>
           </div>
@@ -60,61 +57,61 @@
 </template>
 
 <script>
-import CompactCalendar from './components/CompactCalendar.vue'
+import CompactCalendar from "./components/CompactCalendar.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     CompactCalendar,
   },
-  data: function() {
+  data: function () {
     return {
       selectedYear: null,
-    }
+    };
   },
   computed: {
-    parameters: function() {
-      return new URLSearchParams(window.location.search)
+    parameters: function () {
+      return new URLSearchParams(window.location.search);
     },
-    currentYear: function() {
+    currentYear: function () {
       if (this.selectedYear === null) {
-        let urlYear = null
+        let urlYear = null;
 
-        if (this.parameters.get('year') !== null) {
-          urlYear = parseInt(this.parameters.get('year'))
+        if (this.parameters.get("year") !== null) {
+          urlYear = parseInt(this.parameters.get("year"));
         }
 
-        if (this.parameters.get('annee') !== null) {
-          urlYear = parseInt(this.parameters.get('annee'))
+        if (this.parameters.get("annee") !== null) {
+          urlYear = parseInt(this.parameters.get("annee"));
         }
 
         if (urlYear !== null) {
-          return urlYear
+          return urlYear;
         }
 
-        let dt = new Date()
-        return dt.getFullYear()
+        let dt = new Date();
+        return dt.getFullYear();
       }
-      return this.selectedYear
+      return this.selectedYear;
     },
   },
   methods: {
-    minus: function() {
+    minus: function () {
       if (this.selectedYear === null) {
-        this.selectedYear = this.currentYear
+        this.selectedYear = this.currentYear;
       }
 
-      this.selectedYear--
+      this.selectedYear--;
     },
-    plus: function() {
+    plus: function () {
       if (this.selectedYear === null) {
-        this.selectedYear = this.currentYear
+        this.selectedYear = this.currentYear;
       }
 
-      this.selectedYear++
+      this.selectedYear++;
     },
   },
-}
+};
 </script>
 
 <style>
@@ -195,7 +192,7 @@ footer .wrapper .copyright {
 
   body {
     -webkit-print-color-adjust: exact; /*Chrome, Safari */
-    color-adjust: exact; /*Firefox*/
+    print-color-adjust: exact; /*Firefox*/
   }
 
   #app {

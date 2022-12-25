@@ -1,4 +1,4 @@
-    
+
 function addDays(date, days) {
     var result = new Date(date)
     result.setDate(result.getDate() + days)
@@ -27,7 +27,7 @@ function listWeekDaysBetweenDays(startDate, endDate) {
   while (currDay <= endDate) {
     week.push(new Date(currDay))
     currDay = nextDay(currDay)
-    
+
     if (ni++ >= 6) {
       dates.push(week)
       week = []
