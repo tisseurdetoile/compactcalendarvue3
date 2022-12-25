@@ -1,0 +1,14 @@
+// Vitest Snapshot v1
+
+exports[`DayItem.vue > renders correctly 1`] = `
+<li
+  class="day"
+  data-v-9f0d1115=""
+>
+  <span
+    data-v-9f0d1115=""
+  >
+    17
+  </span>
+</li>
+`;
