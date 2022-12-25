@@ -11,32 +11,32 @@
   </ul>
 </template>
 <script>
-import WeekItem from './week/WeekItem'
-import WeekHeader from './week/WeekHeader'
+import WeekItem from "./week/WeekItem.vue";
+import WeekHeader from "./week/WeekHeader.vue";
 export default {
   components: { WeekItem, WeekHeader },
   props: {
     mondayfirst: Boolean,
     weeks: {
       type: Array,
-      default: function() {
-        return []
-        }
+      default: function () {
+        return [];
       },
+    },
     vacations: {
       type: Object,
-      default: function() {
-        return {}
-        }
+      default: function () {
+        return {};
       },
+    },
     holidays: {
       type: Array,
-      default: function() {
-        return []
-        }
-      }
+      default: function () {
+        return [];
+      },
+    },
   },
-}
+};
 </script>
 
 <style scoped></style>

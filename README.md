@@ -1,39 +1,57 @@
-# Welcome to compactcalendarvue3 👋
+# testproject
 
-![Version](https://img.shields.io/badge/version-0.2.1-blue.svg?cacheSeconds=2592000)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)
-[![Twitter: tisseurdetoile](https://img.shields.io/twitter/follow/tisseurdetoile.svg?style=social)](https://twitter.com/tisseurdetoile)
+This template should help get you started developing with Vue 3 in Vite.
 
-> An compactCalendar implementation in Vue3
+## Recommended IDE Setup
 
-### 🏠 [Homepage](https://github.com/tisseurdetoile/compactcalendarvue3)
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
-### ✨ [Demo](http://github.tisseurdetoile.net/compactcalendarvue3/)
+## Customize configuration
 
-## Install
+See [Vite Configuration Reference](https://vitejs.dev/config/).
 
-```sh
-yarn install
-```
-
-## Run tests
+## Project Setup
 
 ```sh
-yarn run test
+npm install
 ```
 
-## Author
+### Compile and Hot-Reload for Development
 
-👤 **Le TisseurDeToile**
+```sh
+npm run dev
+```
 
-- Website: http://www.tisseurdetoile.net
-- Twitter: [@tisseurdetoile](https://twitter.com/tisseurdetoile)
-- Github: [@tisseurdetoile](https://github.com/tisseurdetoile)
+### Compile and Minify for Production
 
-## Show your support
+```sh
+npm run build
+```
 
-Give a ⭐️ if this project helped you!
+### Run Unit Tests with [Vitest](https://vitest.dev/)
 
----
+```sh
+npm run test:unit
+```
 
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
+### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
+
+```sh
+npm run test:e2e:dev
+```
+
+This runs the end-to-end tests against the Vite development server.
+It is much faster than the production build.
+
+But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
+
+```sh
+npm run build
+npm run test:e2e
+```
+
+### Lint with [ESLint](https://eslint.org/)
+
+```sh
+npm run lint
+```
