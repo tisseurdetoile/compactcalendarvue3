@@ -19,24 +19,22 @@ export default {
     mondayfirst: Boolean,
     weeks: {
       type: Array,
-      default: function () {
+      default: () => {
         return [];
       },
     },
     vacations: {
       type: Object,
-      default: function () {
+      default: () => {
         return {};
       },
     },
     holidays: {
       type: Array,
-      default: function () {
+      default: () => {
         return [];
       },
     },
   },
 };
 </script>
-
-<style scoped></style>

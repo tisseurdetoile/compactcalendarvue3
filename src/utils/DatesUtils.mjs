@@ -1,40 +1,39 @@
-
 function addDays(date, days) {
-    var result = new Date(date)
-    result.setDate(result.getDate() + days)
-    return result
-  }
+  var result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return result;
+}
 
 function nextDay(date) {
-    return addDays(date, 1)
+  return addDays(date, 1);
 }
 
 function listDaysBetweenDays(startDate, endDate) {
-  let currDay = new Date(startDate)
-  const dates = []
+  let currDay = new Date(startDate);
+  const dates = [];
   while (currDay <= endDate) {
-    dates.push(new Date(currDay))
-    currDay = nextDay(currDay)
+    dates.push(new Date(currDay));
+    currDay = nextDay(currDay);
   }
-  return dates
+  return dates;
 }
 
 function listWeekDaysBetweenDays(startDate, endDate) {
-  let currDay = new Date(startDate)
-  const dates = []
-  let ni = 0
-  let week = []
+  let currDay = new Date(startDate);
+  const dates = [];
+  let ni = 0;
+  let week = [];
   while (currDay <= endDate) {
-    week.push(new Date(currDay))
-    currDay = nextDay(currDay)
+    week.push(new Date(currDay));
+    currDay = nextDay(currDay);
 
     if (ni++ >= 6) {
-      dates.push(week)
-      week = []
-      ni = 0
+      dates.push(week);
+      week = [];
+      ni = 0;
     }
   }
-  return dates
+  return dates;
 }
 
-export { listDaysBetweenDays, listWeekDaysBetweenDays }
+export { listDaysBetweenDays, listWeekDaysBetweenDays };
