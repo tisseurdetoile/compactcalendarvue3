@@ -47,11 +47,11 @@
           </div>
           <div class="copyright">
             <p>
-              © 2021-2023
+              © 2021-2024
               <a href="https://davidseah.com/">David Seah</a>
             </p>
             <p>
-              © 2021-2023
+              © 2021-2024
               <a href="http://www.tisseurdetoile.net/">Le TisseurDeToile</a>
             </p>
           </div>
