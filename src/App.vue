@@ -47,11 +47,11 @@
           </div>
           <div class="copyright">
             <p>
-              © 2021-2024
+              © 2021-2025
               <a href="https://davidseah.com/">David Seah</a>
             </p>
             <p>
-              © 2021-2024
+              © 2021-2025
               <a href="http://www.tisseurdetoile.net/">Le TisseurDeToile</a>
             </p>
           </div>
@@ -104,6 +104,7 @@ export default {
     minus: function () {
       if (this.selectedYear === null) {
         this.selectedYear = this.currentYear;
+        document.title = `CompactCalendar ${this.selectedYear}`;
       }
 
       this.selectedYear--;
@@ -114,6 +115,7 @@ export default {
       }
 
       this.selectedYear++;
+      document.title = `CompactCalendar ${this.selectedYear}`;
     },
   },
 };
