@@ -17,6 +17,10 @@ import { listDaysBetweenDays } from "../utils/DatesUtils.mjs";
 
 import CalendarItem from "./CalendarItem.vue";
 
+function removewildcard(item) {
+  return item !== "*"
+}
+
 export default {
   name: "CompactCalendar",
   components: { CalendarItem },
@@ -59,7 +63,13 @@ export default {
         this.currZone = this.zones[0];
       }
 
-      let days = this.holiday.vacation[this.currZone].flatMap((x) =>
+      /**
+       * On aggrege les jour commun dans "*" et les jours specifiques
+       */
+      let commonDays = this.holiday.vacation["*"] !== undefined ? this.holiday.vacation["*"] : []
+      let alldays = [...this.holiday.vacation[this.currZone], ...commonDays]
+
+      let days = alldays.flatMap((x) =>
         listDaysBetweenDays(new Date(x.start), new Date(x.end))
       );
 
@@ -101,7 +111,7 @@ export default {
         .then(
           (json) => {
             this.holiday = json;
-            this.zones = Object.keys(this.holiday.vacation);
+            this.zones = Object.keys(this.holiday.vacation).filter(removewildcard);
             this.loadZone();
           },
           (error) => {
