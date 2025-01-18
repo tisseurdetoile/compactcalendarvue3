@@ -9,7 +9,9 @@
     :holidays="holidays"
     :vacations="vacations"
   />
-  <li />
+  <ul>
+    <li />
+  </ul>
 </template>
 <script>
 import WeekNumber from "./WeekNumber.vue";
@@ -40,9 +42,7 @@ export default {
   },
   computed: {
     changedMonth: function () {
-      return this.week.find((day) => day.getDate() == 1) !== undefined
-        ? true
-        : false;
+      return this.week.find((day) => day.getDate() == 1) !== undefined;
     },
     lastDay: function () {
       return this.week[6];
