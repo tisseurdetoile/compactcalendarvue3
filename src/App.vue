@@ -30,7 +30,7 @@
             <a
               href="https://github.com/tisseurdetoile/compactcalendarvue3/issues"
             >
-              An idea
+              {{ $t("message.participer") }}
             </a>
           </p>
         </div>
@@ -38,20 +38,20 @@
         <div class="about">
           <div class="colophon">
             <p>
-              CompactCalendarVue is an Vue application <br />
-              CompactCalendar is a creation of
+              {{ $t("message.infoL1") }} <br />
+              {{ $t("message.infoL2") }}
               <a href="https://davidseah.com/">David Seah</a><br />
-              Adapted in <a herf="https://vuejs.org/">Vue</a> by
+              {{ $t("message.infoL3") }}
               <a href="http://www.tisseurdetoile.net/">Le TisseurDeToile</a>
             </p>
           </div>
           <div class="copyright">
             <p>
-              © 2021-2025
+              {{ $t("message.copyright") }}
               <a href="https://davidseah.com/">David Seah</a>
             </p>
             <p>
-              © 2021-2025
+              {{ $t("message.copyright") }}
               <a href="http://www.tisseurdetoile.net/">Le TisseurDeToile</a>
             </p>
           </div>

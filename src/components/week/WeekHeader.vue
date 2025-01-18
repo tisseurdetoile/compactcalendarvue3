@@ -1,6 +1,6 @@
 <template>
   <li class="header hweek">#</li>
-  <li class="header hmonth">mois</li>
+  <li class="header hmonth">{{ $t("libelle.mois") }}</li>
   <li v-for="day in week" :key="day.id" class="header hday">
     <span>{{ day.toLocaleDateString(undefined, { weekday: "narrow" }) }}</span>
   </li>
@@ -18,9 +18,7 @@ export default {
   },
   computed: {
     changedMonth: function () {
-      return this.week.find((day) => day.getDate() == 1) !== undefined
-        ? true
-        : false;
+      return this.week.find((day) => day.getDate() == 1) !== undefined;
     },
     lastDay: function () {
       return this.week[6];
