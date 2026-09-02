@@ -17,7 +17,6 @@ import WeekHeader from "./week/WeekHeader.vue";
 export default {
   components: { WeekItem, WeekHeader },
   props: {
-    mondayfirst: Boolean,
     weeks: {
       type: Array,
       default: () => {

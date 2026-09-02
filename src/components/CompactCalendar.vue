@@ -7,7 +7,6 @@
     :weeks="calendar.weeks"
     :vacations="vacations"
     :holidays="holiday.days"
-    :mondayfirst="calendar.mondayfirst"
   />
 </template>
 
@@ -106,24 +105,26 @@ export default {
           },
           (error) => {
             throw new Error(`Something went wrong e=${error}`);
-          }
+          },
         )
         .then(
           (json) => {
             this.holiday = json;
-            this.zones = Object.keys(this.holiday.vacation).filter(removewildcard);
+            this.zones = Object.keys(this.holiday.vacation).filter(
+              removewildcard,
+            );
             this.loadZone();
           },
           (error) => {
             console.log(`no json data for ${url} error:>${error}<`);
-          }
+          },
         );
     },
   },
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+<!-- style for all components -->
 <style>
 ul {
   overflow: hidden;
