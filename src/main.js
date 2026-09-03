@@ -9,7 +9,7 @@ const messages = {
       infoL2: "CompactCalendar est une creation de",
       infoL3: "Adapté en Vue3 par",
       participer: "Participer",
-      copyright: "© 2021-2025",
+      copyright: "© 2021-2027",
     },
   },
   en: {
@@ -19,7 +19,7 @@ const messages = {
       infoL2: "CompactCalendar is a creation of",
       infoL3: "Adapted in Vue by",
       participer: "An idea",
-      copyright: "© 2021-2025",
+      copyright: "© 2021-2027",
     },
   },
   sv: {
@@ -29,7 +29,7 @@ const messages = {
       infoL2: "CompactCalendar är en skapelse av",
       infoL3: "Anpassad i Vue by",
       participer: "En idé",
-      copyright: "© 2021-2025",
+      copyright: "© 2021-2027",
     },
   },
 };
