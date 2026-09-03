@@ -14,23 +14,23 @@
     "lint": "eslint ./src --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "vue": "^3.5.13",
-    "vue-i18n": "^11.1.0"
+    "vue": "^3.5.42",
+    "vue-i18n": "^11.4.10"
   },
   "devDependencies": {
-    "@rushstack/eslint-patch": "^1.10.5",
-    "@vitejs/plugin-vue": "^5.2.1",
-    "@vitest/coverage-v8": "^3.2.4",
+    "@rushstack/eslint-patch": "^1.16.1",
+    "@vitejs/plugin-vue": "^6.0.8",
+    "@vitest/coverage-v8": "^4.1.11",
     "@vue/eslint-config-prettier": "^10.2.0",
-    "@vue/test-utils": "^2.4.6",
+    "@vue/test-utils": "^2.5.0",
     "cypress": "^16.0.0",
-    "eslint": "^9.19.0",
-    "eslint-plugin-cypress": "^4.1.0",
-    "eslint-plugin-vue": "^9.32.0",
-    "jsdom": "^26.0.0",
-    "prettier": "^3.4.2",
-    "start-server-and-test": "^2.0.10",
-    "vite": "^6.0.11",
-    "vitest": "^3.0.4"
+    "eslint": "^10.9.1",
+    "eslint-plugin-cypress": "^7.0.1",
+    "eslint-plugin-vue": "^10.10.0",
+    "jsdom": "^30.0.1",
+    "prettier": "^3.9.6",
+    "start-server-and-test": "^3.0.12",
+    "vite": "^8.2.2",
+    "vitest": "^4.1.11"
   }
 }
