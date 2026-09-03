@@ -104,10 +104,10 @@ export default {
     minus: function () {
       if (this.selectedYear === null) {
         this.selectedYear = this.currentYear;
-        document.title = `CompactCalendar ${this.selectedYear}`;
       }
 
       this.selectedYear--;
+      document.title = `CompactCalendar ${this.selectedYear}`;
     },
     plus: function () {
       if (this.selectedYear === null) {
@@ -121,6 +121,7 @@ export default {
 };
 </script>
 
+<!-- style for all components -->
 <style>
 * {
   margin: 0;

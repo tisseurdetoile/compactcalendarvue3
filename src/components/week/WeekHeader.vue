@@ -15,13 +15,5 @@ export default {
       },
     },
   },
-  computed: {
-    changedMonth: function () {
-      return this.week.find((day) => day.getDate() == 1) !== undefined;
-    },
-    lastDay: function () {
-      return this.week[6];
-    },
-  },
 };
 </script>

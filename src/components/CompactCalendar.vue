@@ -7,7 +7,6 @@
     :weeks="calendar.weeks"
     :vacations="vacations"
     :holidays="holiday.days"
-    :mondayfirst="calendar.mondayfirst"
   />
 </template>
 
@@ -18,7 +17,7 @@ import { listDaysBetweenDays } from "../utils/DatesUtils.mjs";
 import CalendarItem from "./CalendarItem.vue";
 
 function removewildcard(item) {
-  return item !== "*"
+  return item !== "*";
 }
 
 export default {
@@ -50,9 +49,10 @@ export default {
     },
   },
   watch: {
-    // call again the method if the year change
+    // call again the method if the year the zone or the locale change
     year: "fetchData",
     currZone: "loadZone",
+    "$i18n.locale": "fetchData",
   },
   created() {
     this.fetchData();
@@ -66,11 +66,14 @@ export default {
       /**
        * On aggrege les jour commun dans "*" et les jours specifiques
        */
-      let commonDays = this.holiday.vacation["*"] !== undefined ? this.holiday.vacation["*"] : []
-      let alldays = [...this.holiday.vacation[this.currZone], ...commonDays]
+      let commonDays =
+        this.holiday.vacation["*"] !== undefined
+          ? this.holiday.vacation["*"]
+          : [];
+      let alldays = [...this.holiday.vacation[this.currZone], ...commonDays];
 
       let days = alldays.flatMap((x) =>
-        listDaysBetweenDays(new Date(x.start), new Date(x.end))
+        listDaysBetweenDays(new Date(x.start), new Date(x.end)),
       );
 
       // -- TODO a revoir
@@ -80,7 +83,7 @@ export default {
         let floatDay = parseFloat(
           `${day.getMonth() + 1}.${day.toLocaleDateString(undefined, {
             day: "2-digit",
-          })}`
+          })}`,
         );
         if (Object.prototype.hasOwnProperty.call(rObj, year)) {
           rObj[year].push(floatDay);
@@ -93,9 +96,9 @@ export default {
       this.vacations = rObj;
     },
     fetchData() {
-      let url = `./${navigator.language.slice(-2).toLowerCase()}/${
-        this.year
-      }.json`;
+      const locale = this.$i18n.locale;
+      let url = `./${locale}/${this.year}.json`;
+
       fetch(url, {
         method: "get",
         headers: { "content-type": "application/json" },
@@ -106,24 +109,26 @@ export default {
           },
           (error) => {
             throw new Error(`Something went wrong e=${error}`);
-          }
+          },
         )
         .then(
           (json) => {
             this.holiday = json;
-            this.zones = Object.keys(this.holiday.vacation).filter(removewildcard);
+            this.zones = Object.keys(this.holiday.vacation).filter(
+              removewildcard,
+            );
             this.loadZone();
           },
           (error) => {
             console.log(`no json data for ${url} error:>${error}<`);
-          }
+          },
         );
     },
   },
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+<!-- style for all components -->
 <style>
 ul {
   overflow: hidden;
