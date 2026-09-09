@@ -10,6 +10,10 @@ const messages = {
       infoL3: "Adapté en Vue3 par",
       participer: "Participer",
       copyright: "© 2021-2027",
+      source: "Source des congés :",
+      sourceLocal: "Fichiers JSON locaux",
+      sourceApi: "API officielle (data.gouv.fr)",
+      holidayZone: "Zone des jours fériés :",
     },
   },
   en: {
@@ -20,6 +24,10 @@ const messages = {
       infoL3: "Adapted in Vue by",
       participer: "An idea",
       copyright: "© 2021-2027",
+      source: "Holidays source:",
+      sourceLocal: "Local JSON files",
+      sourceApi: "Official API (data.gouv.fr)",
+      holidayZone: "Public holidays zone:",
     },
   },
   sv: {
@@ -30,6 +38,10 @@ const messages = {
       infoL3: "Anpassad i Vue by",
       participer: "En idé",
       copyright: "© 2021-2027",
+      source: "Källa för lov:",
+      sourceLocal: "Lokala JSON-filer",
+      sourceApi: "Officiellt API (data.gouv.fr)",
+      holidayZone: "Zon för helgdagar:",
     },
   },
 };
