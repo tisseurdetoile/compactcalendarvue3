@@ -1,4 +1,22 @@
 <template>
+  <div class="no-print source-picker">
+    <label>
+      {{ $t("message.source") }}
+      <select v-model="dataSource">
+        <option value="local">{{ $t("message.sourceLocal") }}</option>
+        <option value="api">{{ $t("message.sourceApi") }}</option>
+      </select>
+    </label>
+    &nbsp;
+    <label v-if="dataSource === 'api'">
+      {{ $t("message.holidayZone") }}
+      <select v-model="holidayZone">
+        <option v-for="zone in holidayZones" :key="zone.code" :value="zone.code">
+          {{ zone.label }}
+        </option>
+      </select>
+    </label>
+  </div>
   <div v-for="zone in zones" :key="zone" class="no-print">
     <input v-model="currZone" name="currZone" type="radio" :value="zone" />
     <label>{{ zone }}</label>
@@ -16,8 +34,35 @@ import { listDaysBetweenDays } from "../utils/DatesUtils.mjs";
 
 import CalendarItem from "./CalendarItem.vue";
 
+import {
+  localJsonProvider,
+  createApiProvider,
+  HOLIDAY_ZONES,
+  DEFAULT_HOLIDAY_ZONE,
+} from "../services/holidayProviders.js";
+
 function removewildcard(item) {
   return item !== "*";
+}
+
+// Clés utilisées pour retenir le choix de l'utilisateur d'une session à l'autre
+const STORAGE_KEY_SOURCE = "compactcalendar.dataSource";
+const STORAGE_KEY_HOLIDAY_ZONE = "compactcalendar.holidayZone";
+
+function readPreference(key, fallback) {
+  try {
+    return window.localStorage.getItem(key) || fallback;
+  } catch (e) {
+    return fallback;
+  }
+}
+
+function writePreference(key, value) {
+  try {
+    window.localStorage.setItem(key, value);
+  } catch (e) {
+    // stockage indisponible (mode privé, sandbox...) : on ignore
+  }
 }
 
 export default {
@@ -35,6 +80,10 @@ export default {
       zones: [],
       holiday: {},
       vacations: {},
+      // "local" (fichiers JSON du dépôt) ou "api" (data.gouv.fr)
+      dataSource: readPreference(STORAGE_KEY_SOURCE, "local"),
+      holidayZone: readPreference(STORAGE_KEY_HOLIDAY_ZONE, DEFAULT_HOLIDAY_ZONE),
+      holidayZones: HOLIDAY_ZONES,
     };
   },
   computed: {
@@ -53,6 +102,16 @@ export default {
     year: "fetchData",
     currZone: "loadZone",
     "$i18n.locale": "fetchData",
+    dataSource: function (value) {
+      writePreference(STORAGE_KEY_SOURCE, value);
+      this.fetchData();
+    },
+    holidayZone: function (value) {
+      writePreference(STORAGE_KEY_HOLIDAY_ZONE, value);
+      if (this.dataSource === "api") {
+        this.fetchData();
+      }
+    },
   },
   created() {
     this.fetchData();
@@ -95,34 +154,43 @@ export default {
 
       this.vacations = rObj;
     },
-    fetchData() {
+    async fetchData() {
       const locale = this.$i18n.locale;
-      let url = `./${locale}/${this.year}.json`;
+      const provider =
+        this.dataSource === "api"
+          ? createApiProvider(this.holidayZone)
+          : localJsonProvider;
 
-      fetch(url, {
-        method: "get",
-        headers: { "content-type": "application/json" },
-      })
-        .then(
-          (response) => {
-            return response.json();
-          },
-          (error) => {
-            throw new Error(`Something went wrong e=${error}`);
-          },
-        )
-        .then(
-          (json) => {
-            this.holiday = json;
-            this.zones = Object.keys(this.holiday.vacation).filter(
-              removewildcard,
-            );
-            this.loadZone();
-          },
-          (error) => {
-            console.log(`no json data for ${url} error:>${error}<`);
-          },
+      try {
+        const holiday = await provider.load(this.year, locale);
+        this.applyHoliday(holiday);
+      } catch (error) {
+        console.log(
+          `no json data for year=${this.year} source=${this.dataSource} error:>${error}<`,
         );
+
+        // Si l'API officielle est indisponible (hors-ligne, CORS, panne...),
+        // on se rabat automatiquement sur les fichiers JSON locaux quand
+        // ils existent, pour que le calendrier reste utilisable.
+        if (this.dataSource === "api") {
+          try {
+            const fallbackHoliday = await localJsonProvider.load(
+              this.year,
+              locale,
+            );
+            this.applyHoliday(fallbackHoliday);
+          } catch (fallbackError) {
+            console.log(
+              `fallback vers les fichiers locaux impossible error:>${fallbackError}<`,
+            );
+          }
+        }
+      }
+    },
+    applyHoliday(holiday) {
+      this.holiday = holiday;
+      this.zones = Object.keys(this.holiday.vacation).filter(removewildcard);
+      this.loadZone();
     },
   },
 };
@@ -190,5 +258,9 @@ li.hday:nth-child(10n-2) {
 
 .hidden {
   visibility: hidden;
+}
+
+.source-picker {
+  margin-bottom: 0.5em;
 }
 </style>
