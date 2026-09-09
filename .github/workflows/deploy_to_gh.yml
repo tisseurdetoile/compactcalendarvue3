@@ -17,6 +17,10 @@ jobs:
           npm install
           npm run build
 
+      - name: Run Unit Tests 🔍
+        run: |
+          npm run test:unit:coverage
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
