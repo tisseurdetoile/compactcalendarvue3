@@ -20,9 +20,13 @@ describe("WeekMonth.vue", () => {
       props: { dayOfWeek: date, changedMonth: true },
     });
 
-    // On utilise textContent brut : wrapper.text() trim les espaces,
-    // ce qui masquerait le padding qu'on veut justement vérifier.
-    expect(wrapper.element.textContent).toBe(expectedLabel(date));
+    // On vérifie la valeur calculée directement (wrapper.vm.weekMonth)
+    // plutôt que le texte du DOM (wrapper.element.textContent) : ce
+    // dernier inclut les espaces/retours à la ligne du template autour
+    // de {{ weekMonth }}, dont la condensation dépend de la version de
+    // @vue/compiler-sfc résolue — donc pas fiable d'un environnement à
+    // l'autre (ex: npm ci en CI vs cache local).
+    expect(wrapper.vm.weekMonth).toBe(expectedLabel(date));
   });
 
   it("does not truncate month names that are 6 characters or longer", () => {
@@ -34,7 +38,7 @@ describe("WeekMonth.vue", () => {
       props: { dayOfWeek: date, changedMonth: true },
     });
 
-    expect(wrapper.element.textContent).toBe(expectedLabel(date));
+    expect(wrapper.vm.weekMonth).toBe(expectedLabel(date));
   });
 
   it("applies the 'hidden' class when changedMonth is false", () => {
