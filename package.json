@@ -31,6 +31,6 @@
     "prettier": "^3.9.6",
     "start-server-and-test": "^3.0.12",
     "vite": "^8.2.2",
-    "vitest": "^4.1.11"
+    "vitest": "^5.0.2"
   }
 }
