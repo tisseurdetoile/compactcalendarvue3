@@ -12,4 +12,8 @@ export default defineConfig({
     },
   },
   base: "/compactcalendarvue3/",
+  test: {
+    environment: "jsdom",
+    pool: "vmThreads",
+  },
 });

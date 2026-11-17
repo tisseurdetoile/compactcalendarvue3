@@ -3,10 +3,10 @@
 exports[`DayItem.vue > renders correctly 1`] = `
 <li
   class="day"
-  data-v-9f0d1115=""
+  data-v-0ba33274=""
 >
   <span
-    data-v-9f0d1115=""
+    data-v-0ba33274=""
   >
     17
   </span>

@@ -7,8 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test:unit": "vitest --environment jsdom --root src/",
-    "test:unit:coverage": "vitest --environment jsdom --root src/ --coverage run",
+    "test:unit": "vitest",
+    "test:unit:coverage": "vitest --coverage run",
     "test:e2e": "start-server-and-test preview :4173 'cypress run --e2e'",
     "test:e2e:dev": "start-server-and-test 'vite dev --port 4173' :4173 'cypress open --e2e'",
     "lint": "eslint ./src --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
